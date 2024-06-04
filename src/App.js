@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef } from "react";
+import Form from "./Form";
+import { useFetch } from "./hooks/useFetch";
 
 function App() {
+  const myRef = useRef();
+  
+  useEffect(() => {
+    const user = myRef.current.test();
+    console.log({user});
+  });
+
+  const res = useFetch('https://reqres.in/api/users/2');
+  console.log({res});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h3>DEMO APP</h3>
+      <Form ref={myRef} />
+      <button onClick={() => { myRef.current.submitForm() }}>Login from Parent Component</button>
+    </>
   );
 }
 
